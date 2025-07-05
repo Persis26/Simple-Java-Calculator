@@ -1,5 +1,8 @@
 # Simple-Java-Calculator
 A basic calculator using static and non-static methods
+
+
+
 import java.util.Scanner;
 
 public class Calculator {
@@ -11,18 +14,29 @@ public class Calculator {
     public static int add(int a, int b) {
         return a + b;
     }
+    public static int multiply(int a, int b) {
+        return a * b;
+    }
 
     public void displayMenu() {
         System.out.println("Choose an operation:");
         System.out.println("1. Addition");
         System.out.println("2. Subtraction");
-        System.out.println("3. Exit");
+        System.out.println("3. Multiplication");
+        System.out.println("4. Division");
+        System.out.println("5. Exit");
     }
 
     public int subtract(int a, int b) {
         return a - b;
     }
-
+     public double divide(int a, int b) {
+        if (b == 0) {
+            System.out.println("❌ Cannot divide by zero.");
+            return Double.NaN;
+        }
+        return (double) a / b;
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         greetUser();
@@ -34,7 +48,7 @@ public class Calculator {
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
 
-            if (choice == 3) {
+            if (choice == 5) {
                 System.out.println("Exiting...");
                 break;
             }
@@ -43,14 +57,24 @@ public class Calculator {
             int x = sc.nextInt();
             int y = sc.nextInt();
 
-            if (choice == 1) {
-                int result = add(x, y);
-                System.out.println("Sum = " + result);
-            } else if (choice == 2) {
-                int result = calc.subtract(x, y);
-                System.out.println("Difference = " + result);
-            } else {
-                System.out.println("Invalid choice!");
+            switch (choice) {
+                case 1:
+                    System.out.println("Sum = " + add(x, y));
+                    break;
+                case 2:
+                    System.out.println("Difference = " + calc.subtract(x, y));
+                    break;
+                case 3:
+                    System.out.println("Product = " + multiply(x, y));
+                    break;
+                case 4:
+                    double result = calc.divide(x, y);
+                    if (!Double.isNaN(result)) {
+                        System.out.println("Quotient = " + result);
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
             }
 
             System.out.println("--------------------------");
